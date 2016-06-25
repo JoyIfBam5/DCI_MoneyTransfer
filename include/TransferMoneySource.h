@@ -20,19 +20,6 @@
 #include "TransferMoneyContext.h"
 #include <string>
 
-#if 0
-#define SELF static_cast<const ConcreteDerived*>(this)
-
-#define RECIPIENT (((dynamic_cast<TransferMoneyContext*>(Context::currentContext_)?	\
-            dynamic_cast<TransferMoneyContext*>(Context::currentContext_):	\
-            (throw("dynamic cast failed"), static_cast<TransferMoneyContext*>(nullptr))	\
-            )->destinationAccount()))
-
-
-// #define RECIPIENT ((static_cast<TransferMoneyContext*>(Context::currentContext_)->destinationAccount()))
-#define CREDITORS ((static_cast<PayBillsContext*>(Context::currentContext_)->creditors()))
-#endif
-
 
 template <typename T, typename U>
 auto self(U* u)
@@ -47,7 +34,6 @@ auto recipient()
     if (result)
         return result->destinationAccount();
     throw std::bad_cast(); // ("dynamic cast failed");
-    return static_cast<T*>(nullptr)->destinationAccount();
 }
 
 template <typename T>

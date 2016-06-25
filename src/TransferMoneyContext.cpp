@@ -15,16 +15,16 @@
 #include "SavingsAccount.h"
 
 TransferMoneyContext::TransferMoneyContext() : Context() {
-  lookupBindings();
+    lookupBindings();
 }
 
 TransferMoneyContext::TransferMoneyContext(const Currency& amount, MoneySource *source,
-                                           MoneySink *destination)
+    MoneySink *destination)
     : Context() {
-  // Copy the rest of the stuff
-  sourceAccount_ = source;
-  destinationAccount_ = destination;
-  amount_ = amount;
+    // Copy the rest of the stuff
+    sourceAccount_ = source;
+    destinationAccount_ = destination;
+    amount_ = amount;
 }
 
 void TransferMoneyContext::doit()
@@ -34,23 +34,23 @@ void TransferMoneyContext::doit()
 
 
 void TransferMoneyContext::lookupBindings() {
-  // These are somewhat arbitrary and for illustrative
-  // purposes. The simulate a database lookup
-  InvestmentAccount *investmentAccount = new InvestmentAccount;
-  investmentAccount->increaseBalance(Euro(100.00)); // prime it with some money
+    // These are somewhat arbitrary and for illustrative
+    // purposes. The simulate a database lookup
+    InvestmentAccount *investmentAccount = new InvestmentAccount;
+    investmentAccount->increaseBalance(Euro(100.00)); // prime it with some money
 
-  sourceAccount_ = investmentAccount;
-  destinationAccount_ = new SavingsAccount;
-  destinationAccount_->increaseBalance(Euro(500.00)); // start it off with money
-  amount_ = Euro(30.00);
+    sourceAccount_ = investmentAccount;
+    destinationAccount_ = new SavingsAccount;
+    destinationAccount_->increaseBalance(Euro(500.00)); // start it off with money
+    amount_ = Euro(30.00);
 }
 
 MoneySource *TransferMoneyContext::sourceAccount() const {
-  return sourceAccount_;
+    return sourceAccount_;
 }
 
 MoneySink *TransferMoneyContext::destinationAccount() const {
-  return destinationAccount_;
+    return destinationAccount_;
 }
 
 Currency TransferMoneyContext::amount() const
