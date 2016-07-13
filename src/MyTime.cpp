@@ -1,5 +1,5 @@
 /*
- *  MyTimeImplementation.cpp
+ *  MyTime.cpp
  *  AgileBook
  *
  *  Created by James Coplien on 9/2/08.
@@ -9,10 +9,10 @@
 
 #include "MyTime.h"
 
-MyTime::MyTime(long long) 
+MyTime::MyTime(long long)
 { }
 
-MyTime::MyTime(const std::string& timeAsString) 
+MyTime::MyTime(const std::string& timeAsString)
 { }
 
 MyTime::~MyTime() { }
@@ -20,11 +20,11 @@ MyTime::~MyTime() { }
 MyTime::MyTime(const MyTime &t) { }
 
 MyTime &MyTime::operator=(const MyTime &t)
-{ 
-    return *this; 
+{
+    return *this;
 }
 
 bool operator<(const MyTime &x, const MyTime &y)
-{ 
-    return true; 
+{
+    return true;
 }

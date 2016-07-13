@@ -1,5 +1,5 @@
 /*
- *  GlobalsImplementation.cpp
+ *  Globals.cpp
  *  AgileBook
  *
  *  Created by James Coplien on 9/2/08.

@@ -1,10 +1,8 @@
 /*
- *  TransferFundsExample.cpp
- *  AgileBook
+ *  CheckingAccount.cpp
  *
  *  Created by James Coplien on 9/2/08.
  *  Copyright 2008 Gertrud & Cope. All rights reserved.
- *
  */
 
 #include "CheckingAccount.h"
@@ -16,16 +14,16 @@
 using namespace std;
 
 CheckingAccount::CheckingAccount()
-    : availableBalance_(Euro(100.00))
+: availableBalance_(Euro(100.00))
 {
 }
-    
+
 
 Currency CheckingAccount::availableBalance() const
 {
     cout << "CheckingAccount::availableBalance returns "
-        << availableBalance_ << endl;
-
+    << availableBalance_ << endl;
+    
     return availableBalance_;
 }
 
@@ -36,7 +34,7 @@ void CheckingAccount::decreaseBalance(const Currency& c) {
 
 void CheckingAccount::updateLog(const string& message, const MyTime& t, const Currency& c) const {
     cout << "account: " << accountID() << " CheckingAccount::updateLog(\"" << message << "\", MyTime, " << c << ")"
-        << endl;
+    << endl;
 }
 
 void CheckingAccount::increaseBalance(const Currency& c) {

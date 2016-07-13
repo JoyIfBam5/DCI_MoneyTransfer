@@ -1,10 +1,8 @@
 /*
  *  Context.cpp
- *  AgileBook
  *
  *  Created by James Coplien on 1/14/09.
  *  Copyright 2009 Gertrud & Cope. All rights reserved.
- *
  */
 
 #include "Context.h"

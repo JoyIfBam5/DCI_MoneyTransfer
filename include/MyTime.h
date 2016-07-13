@@ -1,6 +1,5 @@
 /*
- *  Time.h
- *  AgileBook
+ *  MyTime.h
  *
  *  Created by James Coplien on 9/2/08.
  *  Copyright 2008 Gertrud & Cope. All rights reserved.
@@ -20,7 +19,7 @@ public:
     ~MyTime();
     MyTime(const MyTime& t);
     MyTime& operator=(const MyTime &t);
-
+    
     friend
     bool operator<(const MyTime &x, const MyTime &y);
 };
