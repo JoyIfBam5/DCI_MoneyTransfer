@@ -1,10 +1,8 @@
 /*
  *  InvestmentAccount.cpp
- *  AgileBook
  *
  *  Created by James Coplien on 9/2/08.
  *  Copyright 2008 Gertrud & Cope. All rights reserved.
- *
  */
 
 #include "InvestmentAccount.h"
@@ -13,30 +11,26 @@
 #include <string>
 #include <iostream>
 
-using std::cout;
-using std::endl;
-
 InvestmentAccount::InvestmentAccount() : availableBalance_(Euro(0.00)) {}
 
 Currency InvestmentAccount::availableBalance() const {
-  cout << "InvestmentAccount::availableBalance returns "
-            << availableBalance_ << endl;
-  return availableBalance_;
+    std::cout << "InvestmentAccount::availableBalance returns "
+    << availableBalance_ << std::endl;
+    return availableBalance_;
 }
 
 void InvestmentAccount::increaseBalance(const Currency &c) {
-  cout << "InvestmentAccount::increaseBalance(" << c << ")" << endl;
-  availableBalance_ += c;
+    std::cout << "InvestmentAccount::increaseBalance(" << c << ")" << std::endl;
+    availableBalance_ += c;
 }
 
 void InvestmentAccount::decreaseBalance(const Currency &c) {
-  cout << "InvestmentAccount::decreaseBalance(" << c << ")" << endl;
-  availableBalance_ -= c;
+    std::cout << "InvestmentAccount::decreaseBalance(" << c << ")" << std::endl;
+    availableBalance_ -= c;
 }
 
-void InvestmentAccount::updateLog(const string &s, const MyTime &,
+void InvestmentAccount::updateLog(const std::string &s, const MyTime &,
                                   const Currency &c) const {
-  cout << "account: " << accountID() << " InvestmentAccount::updateLog(\""
-            << s << "\", Time, " << c << ")" << endl;
+    std::cout << "account: " << accountID() << " InvestmentAccount::updateLog(\""
+    << s << "\", Time, " << c << ")" << std::endl;
 }
-

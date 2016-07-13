@@ -1,5 +1,5 @@
 /*
- *  AccountImplementation.cpp
+ *  Account.cpp
  *  AgileBook
  *
  *  Created by James Coplien on 9/2/08.
@@ -12,7 +12,7 @@
 
 using namespace  std;
 
-namespace 
+namespace
 {
     int accountCounter = 0;
 }
@@ -28,4 +28,3 @@ string Account::accountID() const {
     s << acct_;
     return retval;
 }
-

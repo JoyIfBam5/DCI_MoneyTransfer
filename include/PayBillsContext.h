@@ -1,37 +1,49 @@
 /*
  *  PayBillsContext.h
- *  AgileBook
  *
  *  Created by James Coplien on 9/13/08.
  *  Copyright 2008 Gertrud & Cope. All rights reserved.
- *
  */
- 
- 
+
 #ifndef _PAYBILLSCONTEXT_H
 #define _PAYBILLSCONTEXT_H
 
-#include "Context.h"
-
+#include "TransferMoneyContext.h"
+#include "Creditor.h"
 #include <vector>
 
-class MoneySource;
 class Creditor;
 
 class PayBillsContext: public Context
 {
 public:
     PayBillsContext();
-    void doit();
-    MoneySource *sourceAccount() const;
+    TransferMoneyContext::MoneySource *sourceAccount() const;
     std::vector<Creditor*> creditors() const;
+    // Role behaviors
+    void doit()  {
+        // While object contexts are changing, we don't want to
+        // have an open iterator on an external object. Make a
+        // local copy.
+        for (auto& credit : creditors_) {
+            try {
+                // Note that here we invoke another Use Case
+                TransferMoneyContext transferTheFunds(credit->amountOwed(),
+                                                      sourceAccount(),
+                                                      credit->account());
+                transferTheFunds.doit();
+            } catch (const InsufficientFunds&) {
+                throw;
+            }
+        }
+    }
+
 private:
     void lookupBindings();
-    MoneySource *sourceAccount_;
+    TransferMoneyContext::MoneySource *sourceAccount_;
     std::vector<Creditor *> creditors_;
 };
- 
- 
- 
-#endif
 
+
+
+#endif

@@ -1,5 +1,5 @@
 /*
- *  Currency.h
+ *  Currency.cpp
  *  AgileBook
  *
  *  Created by James Coplien on 7/31/09.
@@ -11,38 +11,38 @@
 
 #include <sstream>
 
-CurrencyBase::CurrencyBase() 
-    : referenceCount_(1) 
+CurrencyBase::CurrencyBase()
+: referenceCount_(1)
 { }
 
 Currency &Currency::operator+=(const Currency &amount) {
-  *actualCurrency_ += amount;
-  return *this;
+    *actualCurrency_ += amount;
+    return *this;
 }
 
 Currency &Currency::operator-=(const Currency &amount) {
-  *actualCurrency_ -= amount;
-  return *this;
+    *actualCurrency_ -= amount;
+    return *this;
 }
 
 Currency &Currency::operator=(const Currency &amount) {
-  amount.actualCurrency_->referenceCount_++;
-  if (--actualCurrency_->referenceCount_ <= 0)
-    delete actualCurrency_;
-  actualCurrency_ = amount.actualCurrency_;
-  return *this;
+    amount.actualCurrency_->referenceCount_++;
+    if (--actualCurrency_->referenceCount_ <= 0)
+        delete actualCurrency_;
+    actualCurrency_ = amount.actualCurrency_;
+    return *this;
 }
 
 
 Currency::Currency(const Currency &amount) {
-  (actualCurrency_ = amount.actualCurrency_)->referenceCount_++;
+    (actualCurrency_ = amount.actualCurrency_)->referenceCount_++;
 }
 
 Currency::Currency() : actualCurrency_(new Euro) {}
 
 Currency::~Currency() {
-  if (--actualCurrency_->referenceCount_ <= 0)
-    delete actualCurrency_;
+    if (--actualCurrency_->referenceCount_ <= 0)
+        delete actualCurrency_;
 }
 
 std::string Currency::name() const
@@ -56,16 +56,16 @@ std::string Currency::sign() const
 }
 
 double Currency::amountInEuro() const {
-  return actualCurrency_->amountInEuro();
+    return actualCurrency_->amountInEuro();
 }
 
 std::string Currency::asString() const {
-  return actualCurrency_->asString();
+    return actualCurrency_->asString();
 }
 
 std::ostream &operator<<(std::ostream &stream, const Currency &currency) {
-  stream << currency.asString();
-  return stream;
+    stream << currency.asString();
+    return stream;
 }
 
 bool operator==(const Currency &x, const Currency &y) {
@@ -77,23 +77,23 @@ bool operator!=(const Currency &x, const Currency &y) {
 }
 
 bool operator<(const Currency &x, const Currency &y) {
-  return x.amountInEuro() < y.amountInEuro();
+    return x.amountInEuro() < y.amountInEuro();
 }
 
 bool operator>(const Currency &x, const Currency &y) {
-  return y < x ;
+    return y < x ;
 }
 
 bool operator<=(const Currency &x, const Currency &y) {
-  return !(y < x);
+    return !(y < x);
 }
 
 bool operator>=(const Currency &x, const Currency &y) {
-  return !(x < y);
+    return !(x < y);
 }
 
 Currency::Currency(CurrencyBase *derivedClassThis)
-    : actualCurrency_(derivedClassThis) 
+: actualCurrency_(derivedClassThis)
 {}
 
 
@@ -108,22 +108,22 @@ CurrencyBase *Euro::copy() const
 }
 
 Euro &Euro::operator+=(const Currency &amount) {
-  amount_ += amount.amountInEuro();
-  return *this;
+    amount_ += amount.amountInEuro();
+    return *this;
 }
 
 Euro &Euro::operator-=(const Currency &amount) {
-  amount_ -= amount.amountInEuro();
-  return *this;
+    amount_ -= amount.amountInEuro();
+    return *this;
 }
 
 Euro &Euro::operator=(const Currency &amount) {
-  amount_ = amount.amountInEuro();
-  return *this;
+    amount_ = amount.amountInEuro();
+    return *this;
 }
 
-Euro::Euro(double amount) 
-    : amount_(amount) 
+Euro::Euro(double amount)
+: amount_(amount)
 {}
 
 std::string Euro::name() const
@@ -142,8 +142,7 @@ double Euro::amountInEuro() const
 }
 
 std::string Euro::asString() const {
-  std::ostringstream stream;
-  stream << amount_;
-  return stream.str();
+    std::ostringstream stream;
+    stream << amount_;
+    return stream.str();
 }
-
