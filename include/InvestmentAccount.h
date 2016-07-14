@@ -13,8 +13,6 @@
 #include "TransferMoneyContext.h"
 #include "MyTime.h"
 
-class PayBillsContext;
-
 class InvestmentAccount:
     public TransferMoneyContext::TransferMoneySource<InvestmentAccount>
 {

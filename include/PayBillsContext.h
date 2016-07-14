@@ -16,6 +16,11 @@ class Creditor;
 
 class PayBillsContext: public Context
 {
+    template <typename T>
+    auto creditors()
+    {
+        return static_cast<T*>(Context::currentContext_)->creditors();
+    }
 public:
     PayBillsContext();
     TransferMoneyContext::MoneySource *sourceAccount() const;
@@ -25,7 +30,7 @@ public:
         // While object contexts are changing, we don't want to
         // have an open iterator on an external object. Make a
         // local copy.
-        for (auto& credit : creditors_) {
+        for (auto& credit : CREDITORS<PayBillsContext>()) {
             try {
                 // Note that here we invoke another Use Case
                 TransferMoneyContext transferTheFunds(credit->amountOwed(),
@@ -37,7 +42,6 @@ public:
             }
         }
     }
-
 private:
     void lookupBindings();
     TransferMoneyContext::MoneySource *sourceAccount_;
