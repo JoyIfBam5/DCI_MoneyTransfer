@@ -50,14 +50,14 @@ public:
             // meaningfully testable with stubs!
             beginTransaction();
             
-            if (self<ConcreteDerived>(this)->availableBalance() < amount) {
+            if (SELF<ConcreteDerived>(this)->availableBalance() < amount) {
                 endTransaction();
                 throw InsufficientFunds();
             } else {
-                self<ConcreteDerived>(this)->decreaseBalance(amount);
-                recipient<TransferMoneyContext>()->increaseBalance(amount);
-                self<ConcreteDerived>(this)->updateLog("Transfer Out", DateTime(), amount);
-                recipient<TransferMoneyContext>()->updateLog("Transfer In", DateTime(), amount);
+                SELF<ConcreteDerived>(this)->decreaseBalance(amount);
+                RECIPIENT<TransferMoneyContext>()->increaseBalance(amount);
+                SELF<ConcreteDerived>(this)->updateLog("Transfer Out", DateTime(), amount);
+                RECIPIENT<TransferMoneyContext>()->updateLog("Transfer In", DateTime(), amount);
             }
             // gui->displayScreen(SUCCESS_DEPOSIT_SCREEN);
             endTransaction();
@@ -80,8 +80,8 @@ public:
         virtual ~TransferMoneySink() = default;
         
         virtual void transferFrom(const Currency& amount) {
-            self<ConcreteDerived>(this)->increaseBalance(amount);
-            self<ConcreteDerived>(this)->updateLog("Transfer in", DateTime(), amount);
+            SELF<ConcreteDerived>(this)->increaseBalance(amount);
+            SELF<ConcreteDerived>(this)->updateLog("Transfer in", DateTime(), amount);
         }
     };
 public:

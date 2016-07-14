@@ -15,20 +15,14 @@ class MoneyPort {
     
 // Common private utility functions
 
-template <typename T>
-auto creditors()
-{
-    return static_cast<T*>(Context::currentContext_)->creditors();
-}
-
 template <typename T, typename U>
-auto self(U* u)
+auto SELF(U* u)
 {
     return static_cast<T*>(u);
 }
 
 template <typename T>
-auto recipient()
+auto RECIPIENT()
 {
     auto result = dynamic_cast<T*>(Context::currentContext_);
     if (result)
