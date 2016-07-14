@@ -17,7 +17,7 @@ class Creditor;
 class PayBillsContext: public Context
 {
     template <typename T>
-    auto creditors()
+    auto CREDITORS()
     {
         return static_cast<T*>(Context::currentContext_)->creditors();
     }
@@ -25,6 +25,7 @@ public:
     PayBillsContext();
     TransferMoneyContext::MoneySource *sourceAccount() const;
     std::vector<Creditor*> creditors() const;
+
     // Role behaviors
     void doit()  {
         // While object contexts are changing, we don't want to

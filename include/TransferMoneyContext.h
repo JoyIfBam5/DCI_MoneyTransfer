@@ -39,7 +39,7 @@ public:
         virtual void updateLog(const std::string&, const MyTime&, const Currency& amount) const = 0;
     };
 
-    template <class ConcreteDerived>
+    template <class RolePlayer>
     class TransferMoneySource: public MoneySource
     {
     public:
@@ -50,13 +50,13 @@ public:
             // meaningfully testable with stubs!
             beginTransaction();
             
-            if (SELF<ConcreteDerived>(this)->availableBalance() < amount) {
+            if (SELF<RolePlayer>(this)->availableBalance() < amount) {
                 endTransaction();
                 throw InsufficientFunds();
             } else {
-                SELF<ConcreteDerived>(this)->decreaseBalance(amount);
+                SELF<RolePlayer>(this)->decreaseBalance(amount);
                 RECIPIENT<TransferMoneyContext>()->increaseBalance(amount);
-                SELF<ConcreteDerived>(this)->updateLog("Transfer Out", DateTime(), amount);
+                SELF<RolePlayer>(this)->updateLog("Transfer Out", DateTime(), amount);
                 RECIPIENT<TransferMoneyContext>()->updateLog("Transfer In", DateTime(), amount);
             }
             // gui->displayScreen(SUCCESS_DEPOSIT_SCREEN);
@@ -72,7 +72,7 @@ public:
         virtual void updateLog(const std::string&, const MyTime&, const Currency& amount) const = 0;
     };
     
-    template <class ConcreteDerived>
+    template <class RolePlayer>
     class TransferMoneySink: public MoneySink
     {
     public:
@@ -80,8 +80,8 @@ public:
         virtual ~TransferMoneySink() = default;
         
         virtual void transferFrom(const Currency& amount) {
-            SELF<ConcreteDerived>(this)->increaseBalance(amount);
-            SELF<ConcreteDerived>(this)->updateLog("Transfer in", DateTime(), amount);
+            SELF<RolePlayer>(this)->increaseBalance(amount);
+            SELF<RolePlayer>(this)->updateLog("Transfer in", DateTime(), amount);
         }
     };
 public:
