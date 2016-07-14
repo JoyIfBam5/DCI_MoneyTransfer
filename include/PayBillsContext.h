@@ -21,6 +21,10 @@ class PayBillsContext: public Context
     {
         return static_cast<T*>(Context::currentContext_)->creditors();
     }
+    auto SOURCE_ACCOUNT()
+    {
+        return static_cast<T*>(Context::currentContext_)->sourceAccount();
+    }
 public:
     PayBillsContext();
     TransferMoneyContext::MoneySource *sourceAccount() const;
@@ -35,7 +39,7 @@ public:
             try {
                 // Note that here we invoke another Use Case
                 TransferMoneyContext transferTheFunds(credit->amountOwed(),
-                                                      sourceAccount(),
+                                                      SOURCE_ACCOUNT<PayBillsContext>(),
                                                       credit->account());
                 transferTheFunds.doit();
             } catch (const InsufficientFunds&) {
