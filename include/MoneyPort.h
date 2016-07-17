@@ -14,7 +14,7 @@
 class MoneyPort {
     
 // Common private utility functions
-
+public:
 template <typename T, typename U>
 auto SELF(U* u)
 {
