@@ -21,6 +21,7 @@ class PayBillsContext: public Context
     {
         return static_cast<T*>(Context::currentContext_)->creditors();
     }
+    template <typename T>
     auto SOURCE_ACCOUNT()
     {
         return static_cast<T*>(Context::currentContext_)->sourceAccount();
