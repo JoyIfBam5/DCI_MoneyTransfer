@@ -16,7 +16,7 @@
 class SavingsAccount:
     public Account,
     public TransferMoneyContext::TransferMoneySink<SavingsAccount> {
-    friend class TransferMoneyContext::TransferMoneySink<SavingsAccount>;	// optional
+    friend class TransferMoneySink<SavingsAccount>;	// optional
 public:
     SavingsAccount();
 private:

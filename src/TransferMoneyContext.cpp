@@ -23,7 +23,7 @@ TransferMoneyContext::TransferMoneyContext(const Currency& amount, MoneySource *
 
 void TransferMoneyContext::doit()
 {
-    sourceAccount()->transferTo(amount());
+    sourceAccount()->transferTo();
 }
 
 
