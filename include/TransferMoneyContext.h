@@ -34,8 +34,8 @@ public:
     {
     public:
         virtual ~MoneySource() = default;
-        virtual void transferTo(const Currency& amount) = 0;
-        virtual void decreaseBalance(const Currency& amount) = 0;
+        virtual void transferTo() = 0;
+        virtual void decreaseBalance(const Currency&) = 0;
         virtual void updateLog(const std::string&, const MyTime&, const Currency& amount) const = 0;
     };
 
@@ -45,19 +45,19 @@ public:
     public:
         TransferMoneySource() = default;
         virtual ~TransferMoneySource() = default;
-        virtual void transferTo(const Currency& amount) override {
+        virtual void transferTo() override {
             // This code is reviewable and
             // meaningfully testable with stubs!
             beginTransaction();
             
-            if (SELF<RolePlayer>(this)->availableBalance() < amount) {
+            if (SELF<RolePlayer>(this)->availableBalance() < AMOUNT<TransferMoneyContext>()) {
                 endTransaction();
                 throw InsufficientFunds();
             } else {
-                SELF<RolePlayer>(this)->decreaseBalance(amount);
-                RECIPIENT<TransferMoneyContext>()->increaseBalance(amount);
-                SELF<RolePlayer>(this)->updateLog("Transfer Out", DateTime(), amount);
-                RECIPIENT<TransferMoneyContext>()->updateLog("Transfer In", DateTime(), amount);
+                SELF<RolePlayer>(this)->decreaseBalance(AMOUNT<TransferMoneyContext>());
+                RECIPIENT<TransferMoneyContext>()->increaseBalance(AMOUNT<TransferMoneyContext>());
+                SELF<RolePlayer>(this)->updateLog("Transfer Out", DateTime(), AMOUNT<TransferMoneyContext>());
+                RECIPIENT<TransferMoneyContext>()->updateLog("Transfer In", DateTime(), AMOUNT<TransferMoneyContext>());
             }
             // gui->displayScreen(SUCCESS_DEPOSIT_SCREEN);
             endTransaction();

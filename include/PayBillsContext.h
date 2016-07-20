@@ -30,7 +30,7 @@ public:
     PayBillsContext();
     TransferMoneyContext::MoneySource *sourceAccount() const;
     std::vector<Creditor*> creditors() const;
-
+    
     // Role behaviors
     void doit()  {
         // While object contexts are changing, we don't want to
@@ -48,6 +48,7 @@ public:
             }
         }
     }
+
 private:
     void lookupBindings();
     TransferMoneyContext::MoneySource *sourceAccount_;
