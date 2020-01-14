@@ -27,14 +27,12 @@ set(HEADERS
   ../include/Currency.h
   ../include/Globals.h
   ../include/InvestmentAccount.h
-  ../include/MoneySink.h
-  ../include/MoneySource.h
+  ../include/MoneyPort.h
   ../include/MyExceptions.h
   ../include/MyTime.h
   ../include/PayBillsContext.h
   ../include/SavingsAccount.h
   ../include/TransferMoneyContext.h
-  ../include/TransferMoneySource.h
 )
 
 add_executable(MoneyTransfer ${SOURCE} ${HEADERS})

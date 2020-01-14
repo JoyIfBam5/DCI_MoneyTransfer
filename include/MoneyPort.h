@@ -10,18 +10,20 @@
 #define MoneyPort_h
 
 #include "Context.h"
+#include <exception>
 
-class MoneyPort {
-    
-// Common private utility functions
+class MoneyPort
+{
+  protected:
+    // Common private utility functions
 
-    template <typename T, typename U>
+    template<typename T, typename U>
     auto SELF(U* u)
     {
         return static_cast<T*>(u);
     }
 
-    template <typename T>
+    template<typename T>
     auto RECIPIENT()
     {
         auto result = dynamic_cast<T*>(Context::currentContext_);
@@ -29,8 +31,8 @@ class MoneyPort {
             return result->destinationAccount();
         throw std::bad_cast(); // ("dynamic cast failed");
     }
-    
-    template <typename T>
+
+    template<typename T>
     auto AMOUNT()
     {
         auto result = dynamic_cast<T*>(Context::currentContext_);
@@ -38,7 +40,6 @@ class MoneyPort {
             return result->amount();
         throw std::bad_cast(); // ("dynamic cast failed");
     }
-    
 };
 
 #endif /* MoneyPort_h */
