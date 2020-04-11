@@ -2,8 +2,11 @@ cmake_minimum_required(VERSION 3.17)
 
 project(DCIMoneyTransfer C CXX)
 
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" OR "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
-  set(CMAKE_CXX_FLAGS "-O3 -g -Wall -std=c++14 -fexceptions")
+  set(CMAKE_CXX_FLAGS "-O3 -g -Wall -fexceptions")
   set(CMAKE_LINK_FLAGS "-pthreads")
 endif()
 

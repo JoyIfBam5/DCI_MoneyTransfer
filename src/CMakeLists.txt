@@ -1,6 +1,6 @@
 project(MoneyTransfer C CXX)
 
-include_directories("${PROJECT_SOURCE_DIR}/..")
+# include_directories("${PROJECT_SOURCE_DIR}/..")
 
 set(SOURCE
   Account.cpp
@@ -36,6 +36,3 @@ set(HEADERS
 )
 
 add_executable(MoneyTransfer ${SOURCE} ${HEADERS})
-
-set_property(TARGET MoneyTransfer PROPERTY CXX_STANDARD 14)
-set_property(TARGET MoneyTransfer PROPERTY CXX_STANDARD_REQUIRED ON)
