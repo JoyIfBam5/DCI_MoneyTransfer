@@ -13,12 +13,10 @@
 #include <memory>
 
 int main() {
-    // auto aNewUseCase = std::make_unique<TransferMoneyContext>();
-    auto aNewUseCase = std::unique_ptr<TransferMoneyContext>(new TransferMoneyContext());
+    auto aNewUseCase = std::make_unique<TransferMoneyContext>();
     aNewUseCase->doit();
-    
-    // auto anotherNewUseCase = std::make_unique<PayBillsContext>();
-    auto anotherNewUseCase = std::unique_ptr<PayBillsContext>(new PayBillsContext());
+
+    auto anotherNewUseCase = std::make_unique<PayBillsContext>();
     anotherNewUseCase->doit();
     return 0;
 }

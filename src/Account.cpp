@@ -10,8 +10,6 @@
 #include "Account.h"
 #include <sstream>
 
-using namespace  std;
-
 namespace
 {
     int accountCounter = 0;
@@ -22,8 +20,8 @@ Account::Account() {
 }
 
 
-string Account::accountID() const {
-    string retval;
+std::string Account::accountID() const {
+    std::string retval;
     std::stringstream s(retval);
     s << acct_;
     return retval;

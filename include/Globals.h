@@ -6,13 +6,10 @@
  *
  */
 
-#ifndef _GLOBALS_H
-#define _GLOBALS_H
+#pragma once
 
 #include "MyTime.h"
 
 extern void endTransaction();
 extern void beginTransaction();
 extern MyTime DateTime();
-
-#endif
